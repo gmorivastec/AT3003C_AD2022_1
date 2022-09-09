@@ -24,7 +24,7 @@ public class EnemyAI : MonoBehaviour
         // 2- referencias
 
         // las referencias pueden (y de hecho inicialmente) ser nulos
-        personaje = GameObject.Find("PersonajePrincipal");
+        //personaje = GameObject.Find("PersonajePrincipal");
     }
 
     // Update is called once per frame
@@ -39,6 +39,7 @@ public class EnemyAI : MonoBehaviour
 
         // aunque pongamos valor constante la velocidad no va a ser
         // nota para el futuro - multiplicar por Time.deltaTime
-        personaje.transform.Translate(1 * Time.deltaTime, 0, 0);
+        // personaje.transform.Translate(1 * Time.deltaTime, 0, 0);
+        Singleton.Instance.transform.Translate(1 * Time.deltaTime, 0, 0);
     }
 }
