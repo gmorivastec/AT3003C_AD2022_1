@@ -23,5 +23,15 @@ public class Nave : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         
         transform.Translate(h * velocidad * Time.deltaTime, 0, 0);
+
+        // usar el axis 
+        if(Input.GetKeyDown(KeyCode.Space)){
+
+            // Instantiate(balaOriginal, transform.position, balaOriginal.transform.rotation);
+            // regla general con instanciado
+            // - si creamos objetos dinámicamente necesitamos una estrategia para destruirlos
+
+            ProjectilePool.Instance.GetProjectile(transform.position);
+        }
     }
 }
