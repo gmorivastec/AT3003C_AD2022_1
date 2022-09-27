@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovimientoBala : MonoBehaviour
+public class Movimiento : MonoBehaviour
 {
     public float velocidad = 5;
+    public string nombreDePool;
+    private Pool pool;
 
     void OnEnable() {
         // POSIBLES ESTRATEGIAS DE DESTRUCCIÓN
@@ -23,21 +25,33 @@ public class MovimientoBala : MonoBehaviour
         StopAllCoroutines();
     }
 
+    void Start() {
+
+        if(nombreDePool == null)
+            throw new System.Exception("NOMBRE DE POOL NO ESPECIFICADO");
+
+        pool = PoolIndex.Instance.ObtenerPool(nombreDePool);
+
+        if(pool == null)
+            throw new System.Exception("NOMBRE DE POOL NO VALIDO");
+    }
+
     // Update is called once per frame
     void Update()
     {
+        
         // Translate por default funciona con espacio local
         transform.Translate(0, 0, velocidad * Time.deltaTime, Space.World);    
     }
 
     void OnCollisionEnter(Collision c){
         
-        ProjectilePool.Instance.LeaveProjectile(gameObject);
+        pool.LeaveObject(gameObject);
     }
 
     IEnumerator Deshabilitar() {
 
         yield return new WaitForSeconds(5);
-        ProjectilePool.Instance.LeaveProjectile(gameObject);
+        pool.LeaveObject(gameObject);
     }
 }
